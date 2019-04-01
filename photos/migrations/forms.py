@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile,Image
+from .models import Profile,Project
 
 
 class Awwards-projectForm(forms.Form):
@@ -11,10 +11,15 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         exclude = ['user', 'pub_date','editor']
 
-class ImageForm(forms.ModelForm):
+class ProjectForm(forms.ModelForm):
     class Meta:
         model = Image
         exclude = ['user', 'pub_date','like']
         
 
+
+
+
+
+  
 
