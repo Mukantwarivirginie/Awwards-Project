@@ -10,7 +10,8 @@ Django 1.11
 
 Bootstrap
 
-Python 3.6
+python3.6 manage.py runserver
+
 
 CSS 
 
@@ -23,3 +24,8 @@ virgm2020@gmail.com
 
 ## link to live site on GitHub Pages
 https://github.com/Mukantwarivirginie/Awwards-Project
+
+
+## Copyrght and license information
+MIT Copyrght 2019
+
