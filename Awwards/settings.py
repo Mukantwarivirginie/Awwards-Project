@@ -85,7 +85,7 @@ DATABASES = {
     'PASSWORD':'  ',
     }
     }
-}
+
 
 
 # Password validation
