@@ -1,0 +1,19 @@
+{%extends '<all-photos>/base.html'%}
+
+{% block content %}
+
+{%for profiles in profile%}
+<div class="container">
+
+  <div class="row">
+      
+    <img src="{{ profiles.image.url }}" >
+    <h2 class="text-center">{{profiles.name}}</h2>
+    <h3 class="text-center">{{profiles.bio}}</h3>
+    
+      
+  </div>
+</div>
+{%endfor%}
+
+{% endblock %}
