@@ -26,11 +26,11 @@ def projects_of_day(request):
     return render(request, 'all-projects/todays-projects.html',{"projects":projects,"signupForm":form})
 
     def project(request,project_id):
-    try:
-        project = Project.objects.get(id = project_id)
-    except DoesNotExist:
-        raise Http404()
-    return render(request,"all-photos/todays-projects.html")
+        try:
+            project = Project.objects.get(id = project_id)
+        except DoesNotExist:
+            raise Http404()
+        return render(request,"all-photos/todays-projects.html")
 
 
 def search_results(request):

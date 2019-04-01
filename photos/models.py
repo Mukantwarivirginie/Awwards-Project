@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-from django.db import models
+
 
 
 
@@ -23,7 +23,7 @@ class Profile(models.Model):
 
     def update_profile(self):
         self.update()
-        def display_profile(self):
+    def display_profile(self):
         self.display()
 
 
