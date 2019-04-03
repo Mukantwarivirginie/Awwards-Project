@@ -6,8 +6,8 @@ from django.http  import HttpResponse
 from .models import Project,Profile
 from .forms import SignUpForm
 
-def Awward(request):
-     return render(request, 'Awward.html')
+def Awwards(request):
+     return render(request, 'Awwards.html')
 
 def projects_of_day(request):
     projects = Project.todays_projects()
