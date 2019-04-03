@@ -7,7 +7,7 @@ from .models import Project,Profile
 from .forms import SignUpForm
 
 def Awwards(request):
-     return render(request, 'Awwards.html')
+     return render(request,'all-photos/todays-photos.html')
 
 def projects_of_day(request):
     projects = Project.todays_projects()
