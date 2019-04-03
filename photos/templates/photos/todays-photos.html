@@ -1,31 +1,9 @@
-{%extends '<all-photos>/base.html'%}
+{%extends 'photos/base.html'%}
 {% block content %} 
 {{ block.super}}
 
 <div class="container">
 
-  {% for image in photos%}
-
-  <div class="row text">
-    
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 center">
-      
-        
-     
-      <h2 class="text-center"> {{ image.image_name }}</h2>
-      <img src="{{ image.picture.url }}" width="300" height="300"></a>
-      
-    </div>
-    <div class="container-fluid">
-
-      <form  action="{%url 'photosToday'%}" method="post">
-        {%csrf_token%}
-    
-        {% bootstrap_form letterForm layout='inline' %}
-        <input type="submit" value="Subscribe">
-      </form>
-    
-    </div>
 
     {% for news_item in photos %}
 
