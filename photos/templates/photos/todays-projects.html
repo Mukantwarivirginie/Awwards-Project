@@ -5,17 +5,17 @@
 <div class="container">
 
 
-    {% for news_item in photos %}
+    {% for news_item in projects %}
 
     <div class="row">
    
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <h2 class="text-center"> {{ news_item.image_name }} </h2>
+        <h2 class="text-center"> {{ news_item.title }} </h2>
       </div>
   
       
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <img src="{{news_item.picture.url}}" class="img-responsive" alt="Image">
+        <img src="{{news_item.picture_Main_pic.url}}" class="img-responsive" alt="Image">
       </div>
   
     </div>

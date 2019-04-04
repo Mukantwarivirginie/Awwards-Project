@@ -1,4 +1,4 @@
-{%extends '<all-photos>/base.html'%}
+{%extends 'photos/base.html'%}
 
 {% block content %}
 
@@ -7,7 +7,7 @@
 
   <div class="row">
       
-    <img src="{{ profiles.image.url }}" >
+    <img src="{{ profiles.picture_Main_pic.url }}" >
     <h2 class="text-center">{{profiles.name}}</h2>
     <h3 class="text-center">{{profiles.bio}}</h3>
     

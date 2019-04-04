@@ -1,15 +1,16 @@
 from django.shortcuts import render
 
+
 # Create your views here.
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http  import HttpResponse
 from .models import Project,Profile
-from .forms import SignUpForm
+from .forms import SignUpForm,ProfileForm,ProjectForm
 from django.contrib.auth.decorators import login_required
 
-def Awwards(request):
-
-    return render(request, 'photos/todays-photos.html')
+def awwards(request):
+    projects = Project.objects.all()
+    return render(request, 'photos/todays-projects.html', {"projects":projects})
 
 def projects_of_day(request):
     projects = Project.todays_projects()
@@ -38,7 +39,7 @@ def projects_of_day(request):
 
 
 
-@login_required(login_url='/accounts/login/')
+
 def new_profile(request):
     current_user = request.user
     if request.method == 'POST':
@@ -51,13 +52,13 @@ def new_profile(request):
 
     else:
         form = ProfileForm()
-    return render(request, 'new_profile.html', {"form": form})
+    return render(request, 'new-profile.html', {"form": form})
 
 
 @login_required(login_url='/accounts/login/')
 def view_profile(request):
     current_user = request.user
-    profile = Profile.objects.filter(editor=current_user.id)
+    profile = Profile.objects.filter(email=current_user.email)
     print(profile)
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES)
@@ -70,7 +71,7 @@ def view_profile(request):
 
     else:
         form = ProfileForm()
-    return render(request, 'view_profile.html', {"form": form,"profile":profile})
+    return render(request, 'view-profile.html', {"form": form,"profile":profile})
 
 
 @login_required(login_url='/accounts/login/')
@@ -84,26 +85,26 @@ def addimage(request):
             image.user = current_user
             image.save()
    
-        return redirect('instagram')
+        return redirect('awwards')
 
     else:
         form = ImageForm()
     return render(request, 'addimage.html', {"form": form})
 
 @login_required(login_url='/accounts/login/')
-def postimage(request):
+def postproject(request):
     current_user = request.user
     if request.method == 'POST':
-        form =  ImageForm(request.POST, request.FILES)
+        form =  ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.save(commit=False)
             image.user = current_user
             image.save()
-        return redirect('instagram')
+        return redirect('Awwards')
 
     else:
-        form =  ImageForm()
-    return render(request, 'postimage.html', {"form": form})
+        form =  ProjectForm()
+    return render(request, 'photos/postproject.html', {"form": form})
 
 
 

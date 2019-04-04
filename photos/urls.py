@@ -19,9 +19,15 @@ from . import views
 from django.conf.urls.static import static
 from django.conf import settings
 urlpatterns = [
-     url(r'', views.Awwards, name = 'Awwards'),
+     url(r'^$', views.awwards, name = 'Awwards'),
      url(r'^projects/(\d+)',views.projects_of_day,name ='project'),
-     url(r'^new/profile$', views.new_profile, name='new-profile'),
-     url(r'^new/view_profile$', views.view_profile, name='view_profile'),
-     url(r'^new/view_profile$', views.view_profile, name='view_profile'),
+     url(r'^new/profile', views.new_profile, name='new-profile'),
+     url(r'^new/view_profile', views.view_profile, name='view_profile'),
+    #  url(r'^new/view_profile$', views.view_profile, name='view_profile'),
+     url(r'^new/project', views.postproject, name='postproject'),
      ]
+
+
+
+if settings.DEBUG:
+    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
