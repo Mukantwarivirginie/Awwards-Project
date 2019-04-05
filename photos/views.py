@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .serializer import MerchSerializer
+from .serializer import ProjectSerializer,ProfileSerializer
 
 
 
@@ -43,6 +43,7 @@ def projects_today(request):
 def awwards(request):
     projects = Project.objects.all()
     return render(request, 'photos/todays-projects.html', {"projects":projects})
+
 
 def projects_of_day(request):
     projects = Project.todays_projects()
@@ -140,19 +141,19 @@ def postproject(request):
 
 
 
+
 def search_results(request):
 
-    if 'article' in request.GET and request.GET["article"]:
-        search_term = request.GET.get("article")
-        searched_articles = Image.search_by_title(search_term)
+    if 'project' in request.GET and request.GET["project"]:
+        search_term = request.GET.get("project")
+        searched_projects = Project.search_by_title(search_term)
         message = f"{search_term}"
 
-        return render(request, 'photos/search.html',{"message":message,"articles": searched_articles})
+        return render(request, 'photos/search.html',{"message":message, "projects": searched_projects})
 
     else:
         message = "You haven't searched for any term"
         return render(request, 'photos/search.html',{"message":message})
-
 
 
 
@@ -172,17 +173,18 @@ def projectletter(request):
     return JsonResponse(data)
 
 
-class MerchList(APIView):
+
+class ProjectList(APIView):
     def get(self, request, format=None):
-        all_merch = MoringaMerch.objects.all()
-        serializers = MerchSerializer(all_merch, many=True)
+        all_merch = Project.objects.all()
+        serializers = ProjectSerializer(all_merch, many=True)
         permission_classes = (IsAdminOrReadOnly,)
         return Response(serializers.data)
 
 
 
     def post(self, request, format=None):
-        serializers = MerchSerializer(data=request.data)
+        serializers = ProjectSerializer(data=request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
@@ -190,31 +192,52 @@ class MerchList(APIView):
 
 
 
-class MerchDescription(APIView):
-    permission_classes = (IsAdminOrReadOnly,)
-    def get_merch(self, pk):
-        try:
-            return MoringaMerch.objects.get(pk=pk)
-        except MoringaMerch.DoesNotExist:
-            return Http404
 
-    def get(self, request, pk, format=None):
-        merch = self.get_merch(pk)
-        serializers = MerchSerializer(merch)
+class ProfileList(APIView):
+    def get(self, request, format=None):
+        all_merch = Profile.objects.all()
+        serializers = ProfileSerializer(all_merch, many=True)
+        permission_classes = (IsAdminOrReadOnly,)
         return Response(serializers.data)
 
 
-    def put(self, request, pk, format=None):
-        merch = self.get_merch(pk)
-        serializers = MerchSerializer(merch, request.data)
-        if serializers.is_valid():
-            serializers.save()
-            return Response(serializers.data)
-        else:
-            return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-    def delete(self, request, pk, format=None):
-        merch = self.get_merch(pk)
-        merch.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)    
+
+
+
+
+
+
+
+
+
+
+# class MerchDescription(APIView):
+#     permission_classes = (IsAdminOrReadOnly,)
+#     def get_merch(self, pk):
+#         try:
+#             return MoringaMerch.objects.get(pk=pk)
+#         except MoringaMerch.DoesNotExist:
+#             return Http404
+
+#     def get(self, request, pk, format=None):
+#         merch = self.get_merch(pk)
+#         serializers = MerchSerializer(merch)
+#         return Response(serializers.data)
+
+
+#     def put(self, request, pk, format=None):
+#         merch = self.get_merch(pk)
+#         serializers = MerchSerializer(merch, request.data)
+#         if serializers.is_valid():
+#             serializers.save()
+#             return Response(serializers.data)
+#         else:
+#             return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+#     def delete(self, request, pk, format=None):
+#         merch = self.get_merch(pk)
+#         merch.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)    

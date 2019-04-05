@@ -33,6 +33,8 @@ class Profile(models.Model):
     class Meta:
         ordering = ['name']
 
+
+
 class Project(models.Model):
     
     title = models.CharField(max_length =30)
@@ -62,12 +64,9 @@ class Project(models.Model):
 
     @classmethod
     def search_by_title(cls,search_term):
-        title = Project.objects.filter(title__icontains=search_term).all()
-        projects=None
-        for i in title:
-            print(i)
-            projects=cls.objects.filter(title=i.id)
+        projects=Project.objects.filter(title__icontains=search_term).all()
         return projects
+     
  
 
     class Meta:

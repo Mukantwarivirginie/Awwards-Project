@@ -27,10 +27,15 @@ urlpatterns = [
     #  url(r'^new/view_profile$', views.view_profile, name='view_profile'),
      url(r'^new/project', views.postproject, name='postproject'),
      url(r'^ajax/projectletter/$', views.projectletter, name='projectletter'),
-     url(r'^api/merch/$', views.MerchList.as_view()),
+
+     url(r'^api/project/$', views.ProjectList.as_view()),
+
+     url(r'^api/profile/$', views.ProfileList.as_view()),
+
     url(r'^api-token-auth/', obtain_auth_token),
-    url(r'api/merch/merch-id/(?P<pk>[0-9]+)/$',
-    views.MerchDescription.as_view())
+     url(r'^search/', views.search_results, name='search_results'),
+    # url(r'api/merch/merch-id/(?P<pk>[0-9]+)/$',
+    # views.MerchDescription.as_view())
 
      ]
 
