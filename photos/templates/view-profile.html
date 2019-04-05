@@ -2,7 +2,7 @@
 
 {% block content %}
 
-{%for profiles in profile%}
+{%for profiles in profile %}
 <div class="container">
 
   <div class="row">
@@ -14,6 +14,8 @@
       
   </div>
 </div>
+{%empty%}
+<p>ggg</p>
 {%endfor%}
 
 {% endblock %}
